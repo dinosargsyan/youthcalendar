@@ -1,7 +1,12 @@
+import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import dayjs from "dayjs";
 import React, { useContext } from "react";
 import logo from "../assets/logo.png";
 import GlobalContext from "../context/GlobalContext";
+import "../components/CalendarHeader.scss";
+import SignUpModal from './SignUpModal';
+import LogInModal from './LogInModal';
 export default function CalendarHeader() {
   const { monthIndex, setMonthIndex } = useContext(GlobalContext);
   function handlePrevMonth() {
@@ -19,9 +24,9 @@ export default function CalendarHeader() {
   }
   return (
     <header className="px-4 py-2 flex items-center">
-      <img src={logo} alt="calendar" className="mr-2 w-12 h-12" />
+      {/* <img src={logo} alt="calendar" className="mr-2 w-12 h-12" /> */}
       <h1 className="mr-10 text-xl text-gray-500 fond-bold">
-        Calendar
+        Youth Calendar
       </h1>
       <button
         onClick={handleReset}
@@ -44,6 +49,10 @@ export default function CalendarHeader() {
           "MMMM YYYY"
         )}
       </h2>
+      <div className="auth">
+        <LogInModal />
+      <SignUpModal />
+      </div>
     </header>
   );
 }

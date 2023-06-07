@@ -6,6 +6,7 @@ import React, {
 } from "react";
 import GlobalContext from "./GlobalContext";
 import dayjs from "dayjs";
+import EventModal from "../components/EventModal";
 
 function savedEventsReducer(state, { type, payload }) {
   switch (type) {
@@ -17,6 +18,9 @@ function savedEventsReducer(state, { type, payload }) {
       );
     case "delete":
       return state.filter((evt) => evt.id !== payload.id);
+    case "clear":
+      return [payload];
+        
     default:
       throw new Error();
   }
@@ -34,6 +38,7 @@ export default function ContextWrapper(props) {
   const [showEventModal, setShowEventModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [labels, setLabels] = useState([]);
+  const [isLogin, setIsLogin] = useState(false);
   const [savedEvents, dispatchCalEvent] = useReducer(
     savedEventsReducer,
     [],
@@ -106,6 +111,8 @@ export default function ContextWrapper(props) {
         labels,
         updateLabel,
         filteredEvents,
+        isLogin,
+        setIsLogin,
       }}
     >
       {props.children}
